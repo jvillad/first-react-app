@@ -1,40 +1,15 @@
-import React from "react";
 import { createRoot } from "react-dom";
-
-// capitalise naming for every component
-const Pet = (props) => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, props.name),
-    React.createElement("h2", {}, props.animal),
-    React.createElement("h2", {}, props.breed),
-  ]);
-};
+import Pet from "./Pet";
 
 const App = () => {
-  return React.createElement(
-    "div",
-    {}, // where to set the attributes ie. style tag, class name, id
-    [
-      React.createElement("h1", {}, "Adopt me!"), // children of the parent element
-      React.createElement(Pet, {
-        animal: "Dog",
-        name: "T-Rex",
-        breed: "Aspin",
-      }),
-      React.createElement(Pet, {
-        animal: "Dog",
-        name: "Mona",
-        breed: "Aspin",
-      }),
-      React.createElement(Pet, {
-        animal: "Benjie",
-        name: "T-Rex",
-        breed: "Husky/Belgian",
-      }),
-    ]
-  );
+  <div>
+    <h1>Adopt Me!</h1>
+    <Pet name="T-Wex" animal="🐶" breed="Aspin" />
+    <Pet name="Mona" animal="🐶" breed="Aspin" />
+    <Pet name="Benjot" animal="🐶" breed="Belgian/Husky" />
+  </div>;
 };
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(React.createElement(App));
+root.render(<App />);

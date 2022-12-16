@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import Pet from "./Pet";
+import useBreedList from "./useBreedList";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
-  const breeds = [];
   const [pets, setPets] = useState([]);
+  const [breeds] = useBreedList(animal);
 
+  // use effect for network request
   useEffect(() => {
     requestPets();
   }, []);
@@ -19,6 +21,7 @@ const SearchParams = () => {
     );
     const json = await res.json();
 
+    // pass the list of pets coming back from the API
     setPets(json.pets);
   }
 
@@ -56,7 +59,7 @@ const SearchParams = () => {
           </select>
         </label>
         <label htmlFor="breed">
-          breed
+          Breed
           <select
             id="breed"
             disabled={breeds.length === 0}
@@ -73,6 +76,7 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
+      {/* TODO: Put in a new component */}
       {pets.map((pet) => (
         <Pet
           name={pet.name}
